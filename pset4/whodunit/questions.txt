@@ -1,0 +1,12 @@
+1.  stdint.h is a header file that allows programmers to reference specific bit sized (width) integers, for the purpose of having fine tuned control over variable size.
+2.  Sometimes you need a very specific variable size for an array or offset, so using those fixed size integer derivatives allows more fine tuned control over your code.
+3.  BYTE: 1, DWORD: 4, LONG: 4,WORD: 2
+4.  0x42 0x4D (BM)
+5.  bfSize is contained within the BITMAPFILEHEADER (size of BMP file in bytes) whereas biSize is contained within the BITMAPINFOHEADER (size of the header)
+6.  If the biHeight is negative, it means the image is stored upsidedown (first pixel data is last in the file sequence).
+7.  biBitCount represents bits per pixel
+8.  It might return null if the file does not exist
+9.  In the copy.c code, in each instance it is only reading one block of t_size "size", but the size changes each time.
+10. The padding should end up being 3. (4 - (9 % 4)) % 4 = 3
+11. fseek sets an offset in the filestream object so that we can read from a specific byte (as specified)
+12. SEEK_CUR appears to represent the current position.
