@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-  // ensure proper usage
+  // ensure proper usage I add more
   if (argc < 2)
   {
     fprintf(stderr, "Usage: ./recover recovery-file\n");
@@ -19,6 +19,6 @@ int main(int argc, char *argv[])
     return 2;
   }
 
-  //This is a comment that I am entering
+  //This is a comment
 
 }
