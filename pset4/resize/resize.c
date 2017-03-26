@@ -7,7 +7,7 @@
 #include <math.h>
 #include "bmp.h"
 
-
+// Use passing by memory address to edit the value directly
 int GetAddedValue(double * value)
 {
   int returnVal = (int)*value;
@@ -100,10 +100,11 @@ int main(int argc, char *argv[])
   // determine padding for scanlines
   int newPadding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
 
+  //multiplier = 5.7
   double nFactor, remainder;
 
   remainder = modf(multiplier, &nFactor);
-
+  //remainder = 0.7, nFactor = 5.0
   double verticalSubFactor = 0.0;
   double horizontalSubFactor = 0.0;
 
@@ -114,6 +115,7 @@ int main(int argc, char *argv[])
 
   int pixelDuplicateExtraTimes = 0;
   int rowDuplicateExtraTimes = 0;
+
   RGBTRIPLE *row;
   row = malloc(bi.biWidth * sizeof(RGBTRIPLE));
   printf("Using all: %d %d %f %f %d %d %d\n", oldPadding, newPadding, verticalSubFactor, horizontalSubFactor, countlines, amountRead, oldWidth);
@@ -142,6 +144,7 @@ int main(int argc, char *argv[])
     // skip over padding, if any
     fseek(inptr, oldPadding, SEEK_CUR);
     printf("\n");
+
     //Write the heap data as many times as it needs to be done for the row
     for(int r = 0; r < incrementor + rowDuplicateExtraTimes; r++)
     {
@@ -152,18 +155,12 @@ int main(int argc, char *argv[])
         fputc(0x00, outptr);
       }
     }
-
-
-    //move to the next row
   }
 
   free(row);
 
   printf("sizeof RGBTRIPLE: %li\n", sizeof(RGBTRIPLE));
   printf("sizeof row: %li\n", sizeof(row));
-
-
-
 
   // close infile
   fclose(inptr);
