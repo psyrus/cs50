@@ -3,16 +3,17 @@
  */
 
 #include <stdbool.h>
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "dictionary.h"
+#include "HashTable.h"
 
 /**
  * Returns true if word is in dictionary else false.
  */
 bool check(const char *word)
 {
-    // TODO
-    return false;
+    return CheckHashTable(word);
 }
 
 /**
@@ -20,8 +21,19 @@ bool check(const char *word)
  */
 bool load(const char *dictionary)
 {
-    // TODO
-    return false;
+    FILE *dictFile = fopen(dictionary, "r");
+    if (dictFile == NULL)
+    {
+        fprintf(stderr, "Could not open %s.\n", dictionary);
+        return false;
+    }
+
+    char line[LONGEST_WORD];
+    while (fscanf(dictFile, "%s", line) != EOF) {
+        AddToHashTable(line);
+    }
+    fclose(dictFile);
+    return true;
 }
 
 /**
@@ -29,8 +41,7 @@ bool load(const char *dictionary)
  */
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    return HashListSize;
 }
 
 /**
@@ -38,6 +49,10 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    // TODO
-    return false;
+    for(int i=0; i < OXFORD_WORDS; i++)
+    {
+        ClearNode(stuff[i]);
+    }
+    HashListSize = 0;
+    return true;
 }

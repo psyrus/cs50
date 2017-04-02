@@ -1,7 +1,7 @@
-0.  TODO
-1.  TODO
-2.  TODO
-3.  TODO
-4.  TODO
-5.  TODO
-6.  TODO
+0.  an invented long word said to mean a lung disease caused by inhaling very fine ash and sand dust
+1.  getrusage returns the amount of system resources that were used by process "who", which can include CPU time used, stack usage, IO usage etc.
+2.  There are 16 members in the rusage struct
+3.  If you send it by value, it could introduce the overhead of copying the value over to the total calcuation time.
+4.  The program sets up and initializes all the counters and pointer variables. It then proceeds to measure the resources before and after the load of the dictionary (which defaults to the DEFINE dict if not specified). Following the dictionary load, it will try to load the text file. Once everything is set up, it will loop through the file stream, reading one character at a time until it hits the EOF char, on each loop validating the character [alpha or '] followed by adding the character to the current "word". When a character is a space, it will check the current "word" against the dictionary by adding the terminating char \0 and measuring the check time. Finally, it checks the dictionary size and unloads the dictionary (while measuring resources used). Finally it prints out the debug data.
+5.  fscanf would return the number of characters read, meaning we would have to modify the loop. It also reads by format, so there would be a large overhead checking if it was an alphanumeric string (not just alphabetical). Furthermore, if multiple words were defined on a line, it would complicate matters for the formatting.
+6.  It is important that the passed-by-reference variables are not modified by the load/check methods, so they are read-only.

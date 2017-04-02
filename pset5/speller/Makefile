@@ -8,14 +8,14 @@ CFLAGS = -ggdb3 -O0 -Qunused-arguments -std=c11 -Wall -Werror
 EXE = speller
 
 # space-separated list of header files
-HDRS = dictionary.h
+HDRS = dictionary.h HashTable.h
 
 # space-separated list of libraries, if any,
 # each of which should be prefixed with -l
 LIBS =
 
 # space-separated list of source files
-SRCS = speller.c dictionary.c
+SRCS = speller.c dictionary.c HashTable.c
 
 # automatically generated list of object files
 OBJS = $(SRCS:.c=.o)
