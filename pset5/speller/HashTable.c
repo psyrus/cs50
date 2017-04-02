@@ -17,26 +17,35 @@ unsigned long hash(const char *s)
         us++;
     }
 
+    //Make sure that the index cannot overrun the array bounds
     return h % OXFORD_WORDS;
 }
 
 void AddToHashTable(char* string)
 {
+    //Get the correct position in the hashtable
     unsigned long arrayPos = hash(string);
+
+    //Create the hashnode for the new string (with data)
     HASHNODE* nodePtr = malloc(sizeof(HASHNODE));
     nodePtr->next = NULL;
     nodePtr->storedString = malloc(strlen(string)+1);
     strcpy(nodePtr->storedString, string);
-    if(stuff[arrayPos] == NULL)
+
+    //Add the new hashnode in its appropriate place in the linked list
+    if(hashTable[arrayPos] == NULL)
     {
-        stuff[arrayPos] = nodePtr;
+        hashTable[arrayPos] = nodePtr;
     }
     else
     {
-        HASHNODE* lastNode = GetLastNode(stuff[arrayPos]);
+        HASHNODE* lastNode = GetLastNode(hashTable[arrayPos]);
         lastNode->next = nodePtr;
     }
+
+    //Keep track of how large our hash list is
     HashListSize++;
+
     return;
 }
 
@@ -55,11 +64,15 @@ HASHNODE* GetLastNode(HASHNODE* currentNode)
 bool CheckHashTable(const char* string)
 {
     unsigned long arrayPos = hash(string);
-    if(stuff[arrayPos] == NULL)
+
+    //If no linked list exists, return null
+    if(hashTable[arrayPos] == NULL)
     {
         return false;
     }
-    HASHNODE* node = stuff[arrayPos];
+
+    //Get the first node of the linked list and then iterate through the list checking for the desired value
+    HASHNODE* node = hashTable[arrayPos];
     while(node != NULL)
     {
         if(strcmp(node->storedString,string) == 0)
@@ -87,4 +100,3 @@ void ClearNode(HASHNODE* node)
     free(node);
     return;
 }
-

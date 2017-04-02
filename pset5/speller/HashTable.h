@@ -6,7 +6,6 @@
 #include "string.h"
 #define MULTIPLIER (37)
 #define OXFORD_WORDS (200000)
-#define LONGEST_WORD (45)
 
 typedef struct HASHNODE HASHNODE;
 
@@ -16,17 +15,32 @@ struct HASHNODE
     HASHNODE* next;
 };
 
-HASHNODE* stuff[OXFORD_WORDS];
+HASHNODE* hashTable[OXFORD_WORDS];
 long HashListSize;
 
-void AddToHashTable(char* string);
-
-HASHNODE* GetLastNode(HASHNODE* currentNode);
-
-bool CheckHashTable(const char* string);
-
+/**
+ * The function to create the array position for a given key string
+ */
 unsigned long hash(const char* s);
 
+/**
+ * Adds a string as a key to the hash table
+ */
+void AddToHashTable(char* string);
+
+/**
+ * Function to find the last node on a linked list (recursively)
+ */
+HASHNODE* GetLastNode(HASHNODE* currentNode);
+
+/**
+ * Check if some value exists in the hash table
+ */
+bool CheckHashTable(const char* string);
+
+/**
+ * Function to clear the memory of the hash nodes
+ */
 void ClearNode(HASHNODE* node);
 
 #endif

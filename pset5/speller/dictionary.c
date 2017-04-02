@@ -28,11 +28,15 @@ bool load(const char *dictionary)
         return false;
     }
 
-    char line[LONGEST_WORD];
+    //Read in the word (assumed one word per line) and add it to the hash table
+    char line[LENGTH];
     while (fscanf(dictFile, "%s", line) != EOF) {
         AddToHashTable(line);
     }
+
+    //Close the file
     fclose(dictFile);
+
     return true;
 }
 
@@ -49,9 +53,10 @@ unsigned int size(void)
  */
 bool unload(void)
 {
+    //Loop through the Hash Table's array to clear each linked list
     for(int i=0; i < OXFORD_WORDS; i++)
     {
-        ClearNode(stuff[i]);
+        ClearNode(hashTable[i]);
     }
     HashListSize = 0;
     return true;
